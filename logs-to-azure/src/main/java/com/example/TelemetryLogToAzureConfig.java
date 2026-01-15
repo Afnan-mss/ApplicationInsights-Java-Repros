@@ -2,6 +2,7 @@ package com.example;
 
 import com.azure.monitor.opentelemetry.autoconfigure.AzureMonitorAutoConfigure;
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.instrumentation.log4j.appender.v2_17.OpenTelemetryAppender;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk;
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdkBuilder;
@@ -17,7 +18,10 @@ public class TelemetryLogToAzureConfig {
     public OpenTelemetrySdk openTelemetrywithConnectionString() {
         AutoConfiguredOpenTelemetrySdkBuilder sdkBuilder = AutoConfiguredOpenTelemetrySdk.builder();
         AzureMonitorAutoConfigure.customize(sdkBuilder, connectionString);
-        return sdkBuilder.build().getOpenTelemetrySdk();
+        OpenTelemetrySdk sdk = sdkBuilder.build().getOpenTelemetrySdk();
+        // Install the OpenTelemetry instance to the Log4j2 appender
+        OpenTelemetryAppender.install(sdk);
+        return sdk;
     }
 
     @Bean

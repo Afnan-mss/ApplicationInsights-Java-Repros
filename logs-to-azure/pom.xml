@@ -20,7 +20,7 @@
         <spring.boot.version>3.5.6</spring.boot.version>
         <springframework.version>6.2.11</springframework.version>
         <log4j.version>2.25.3</log4j.version>
-        <start-class>com.example.log.logstoazure.LogsToAzureApplication</start-class>
+        <start-class>com.example.LogsToAzureApplication</start-class>
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <compiler-plugin.version>3.11.0</compiler-plugin.version>
         <embedded.tomcat.version>10.1.47</embedded.tomcat.version>
@@ -33,7 +33,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example.log</groupId>
     <artifactId>logs-to-azure</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>war</packaging>
 
@@ -247,7 +247,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.example.log.logstoazure.LogsToAzureApplication</mainClass>
+                    <mainClass>com.example.LogsToAzureApplication</mainClass>
                     <!--<jvmArguments>-Dfile.encoding=UTF8</jvmArguments>-->
                 </configuration>
             </plugin>

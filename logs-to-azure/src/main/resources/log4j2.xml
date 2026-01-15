@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration status="WARN" packages="io.opentelemetry.instrumentation.log4j.appender.v2_17">
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p --- %C : %msg%n"/>
@@ -11,5 +11,9 @@
             <AppenderRef ref="OpenTelemetryAppender" />
             <AppenderRef ref="ConsoleAppender" />
         </Root>
+        <!-- Prevent circular logging: exclude Azure Monitor exporter logs from being sent back through OpenTelemetryAppender -->
+        <Logger name="com.azure.monitor.opentelemetry.exporter" level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+        </Logger>
     </Loggers>
 </Configuration>
